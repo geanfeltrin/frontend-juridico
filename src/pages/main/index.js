@@ -74,7 +74,7 @@ export default class main extends Component {
             <FileList files={uploadedFiles} onDelete={this.handleDeleteFile} />
           )}
         </div>
-        <PdfList />
+        {/* <PdfList /> */}
       </Container>
     );
   }

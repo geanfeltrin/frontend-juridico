@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 import "react-circular-progressbar/dist/styles.css";
 // import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 const GlobalStyle = createGlobalStyle`
@@ -13,13 +12,14 @@ const GlobalStyle = createGlobalStyle`
 }
 html,body, #root{
     height:100%;
+    
 }
 
 body{
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #F3F5F6 !important;
+    background: royalblue !important;
     font-family: "Lato" !important, sans-serif;
 }
 small{

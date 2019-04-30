@@ -5,6 +5,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100%;
+  flex-direction: column;
 
   div {
     background-color: #ffff;
@@ -13,6 +14,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    padding: 10px;
+
+    margin: 20px;
   }
 `;

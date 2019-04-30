@@ -6,10 +6,22 @@ export default class PdfList extends Component {
   render() {
     return (
       <Container>
-        <div>
-          <h1>Origem do Vínculo</h1>
-          <h1>Seq.</h1>
-          <h1>Indicadores</h1>
+        <div className="row">
+          <div>
+            <span>Seq.</span>
+            <small>1</small>
+          </div>
+          <div>
+            <span>Origem do Vínculo</span>
+            <small>teste</small>
+          </div>
+          <div>
+            <span>Indicadores</span>
+            <small>teste2</small>
+          </div>
+          <div>
+            <button>Fechar</button>
+          </div>
         </div>
       </Container>
     );

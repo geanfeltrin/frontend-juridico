@@ -70,13 +70,6 @@ export default class PdfList extends Component {
     ]
   };
 
-  handleClick(seq) {
-    let sequencia = seq;
-    this.setState({
-      sequencia: [...this.state.sequencia, { seq: sequencia }]
-    });
-  }
-
   calculator(date) {
     var dados = date;
     var value = this.state.Scnis;
@@ -100,6 +93,7 @@ export default class PdfList extends Component {
       checked: newChecked
     });
   };
+  
   render() {
     console.log(this.state.checked);
     const CNIS = [

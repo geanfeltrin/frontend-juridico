@@ -5,15 +5,15 @@ import { uniqueId } from "lodash";
 import ImgDropAndCrop from "../../components/ImgDropCrop";
 import filesize from "filesize";
 
-import responseUpload from "../../linkers/responseUpload";
-import { Container, Upload } from "./styles";
+import { Container } from "./styles";
 import PdfList from "../../components/PdfList";
 
 import api from "../../services/api";
 
 export default class main extends Component {
   state = {
-    uploadedFiles: []
+    uploadedFiles: [],
+    loading: false
   };
 
   handleUpload = files => {
@@ -30,10 +30,12 @@ export default class main extends Component {
     }));
 
     this.setState({
-      uploadedFiles: this.state.uploadedFiles.concat(uploadedFiles)
+      uploadedFiles: this.state.uploadedFiles.concat(uploadedFiles),
+      loading: true
     });
-    uploadedFiles.forEach(this.processUpload);
+    // uploadedFiles.forEach(this.processUpload);
   };
+
   updateFile = (id, data) => {
     this.setState({
       uploadedFiles: this.state.uploadedFiles.map(uploadedFile => {
@@ -72,7 +74,7 @@ export default class main extends Component {
       });
   };
   render() {
-    const { uploadedFiles } = this.state;
+    const { uploadedFiles, loading } = this.state;
     return (
       <Container>
         <div className="upload">
@@ -85,7 +87,11 @@ export default class main extends Component {
           )}
         </div>
         <div>
-          <PdfList />
+          {loading && (
+            <div>
+              <PdfList pdfValue={() => {}} />
+            </div>
+          )}
         </div>
       </Container>
     );

@@ -15,6 +15,9 @@ export const DropContainer = styled.div.attrs({
   cursor: pointer;
 
   transition: height 0.2s ease;
+  background-color: #ffff;
+  width: 500px;
+  height: 100px;
 
   ${props => props.isDragActive && dragActive};
   ${props => props.isDragReject && dragReject};

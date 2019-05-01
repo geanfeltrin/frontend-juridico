@@ -7,14 +7,13 @@ export const Container = styled.div`
   min-height: 100%;
   flex-direction: column;
 
-  div {
+  .upload {
     background-color: #ffff;
     width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-
     margin: 20px;
   }
 `;

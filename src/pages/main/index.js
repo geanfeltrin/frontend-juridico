@@ -75,7 +75,7 @@ export default class main extends Component {
     const { uploadedFiles } = this.state;
     return (
       <Container>
-        <div>
+        <div className="upload">
           {!!uploadedFiles.length < 1 && (
             <ImgDropAndCrop onUpload={this.handleUpload} />
           )}
@@ -83,24 +83,6 @@ export default class main extends Component {
           {!!uploadedFiles.length && (
             <FileList files={uploadedFiles} onDelete={this.handleDeleteFile} />
           )}
-        </div>
-        <div>
-          <PdfList />
-        </div>
-        <div>
-          <PdfList />
-        </div>
-        <div>
-          <PdfList />
-        </div>
-        <div>
-          <PdfList />
-        </div>
-        <div>
-          <PdfList />
-        </div>
-        <div>
-          <PdfList />
         </div>
         <div>
           <PdfList />

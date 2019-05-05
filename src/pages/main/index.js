@@ -13,7 +13,8 @@ import api from "../../services/api";
 export default class main extends Component {
   state = {
     uploadedFiles: [],
-    loading: false
+    loading: false,
+    data: []
   };
 
   handleUpload = files => {
@@ -30,10 +31,9 @@ export default class main extends Component {
     }));
 
     this.setState({
-      uploadedFiles: this.state.uploadedFiles.concat(uploadedFiles),
-      loading: true
+      uploadedFiles: this.state.uploadedFiles.concat(uploadedFiles)
     });
-    // uploadedFiles.forEach(this.processUpload);
+    uploadedFiles.forEach(this.processUpload);
   };
 
   updateFile = (id, data) => {
@@ -66,6 +66,9 @@ export default class main extends Component {
           id: response.data.id,
           url: response.data.url
         });
+        this.setState({ data: response.data.data, loading: true });
+        console.log(response.data.data);
+        console.log("data:", this.state.data);
       })
       .catch(response => {
         this.updateFile(uploadedFiles.id, {
@@ -74,7 +77,10 @@ export default class main extends Component {
       });
   };
   render() {
-    const { uploadedFiles, loading } = this.state;
+    const { uploadedFiles, loading, data } = this.state;
+    const { Seq } = data;
+    console.log(Seq);
+
     return (
       <Container>
         <div className="upload">
@@ -87,11 +93,11 @@ export default class main extends Component {
           )}
         </div>
         <div>
-          {loading && (
-            <div>
-              <PdfList pdfValue={() => {}} />
-            </div>
-          )}
+          {/* {loading && (
+            // <div>
+            //   <PdfList pdfValue={data} />
+            // </div>
+          )} */}
         </div>
       </Container>
     );

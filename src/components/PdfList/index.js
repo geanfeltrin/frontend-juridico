@@ -93,9 +93,9 @@ export default class PdfList extends Component {
       checked: newChecked
     });
   };
-  
+
   render() {
-    console.log(this.state.checked);
+    const { pdfValue } = this.props;
     const CNIS = [
       {
         seq: 1,
@@ -206,28 +206,27 @@ export default class PdfList extends Component {
         }
       }
     ];
-    console.log(this.state.sequencia);
 
     return (
       <Container>
         <List className="t">
-          {CNIS.map(cnis => (
+          {pdfValue.map(cnis => (
             <ListItem
               className="box"
-              key={cnis.seq}
+              key={cnis.Seq}
               role={undefined}
               dense
               button
-              onClick={this.handleToggle(cnis.seq)}
+              onClick={this.handleToggle(cnis.Seq)}
             >
               <div className="inside-box">
                 <div className="content">
                   <span>Seq.</span>
-                  {cnis.seq}
+                  {cnis.Seq}
                 </div>
                 <div className="content">
                   <span>Origem Do Vículo</span>
-                  <span>{cnis.OrigemdoVínculo}</span>
+                  <span>{cnis.Origem_Do_Vinculo}</span>
                 </div>
                 <div className="content">
                   <span>Indicadores</span>

@@ -4,9 +4,9 @@ import FileList from "../../components/FileList";
 import { uniqueId } from "lodash";
 import ImgDropAndCrop from "../../components/ImgDropCrop";
 import filesize from "filesize";
+import PdfList from "../../components/PdfList";
 
 import { Container } from "./styles";
-import PdfList from "../../components/PdfList";
 
 import api from "../../services/api";
 
@@ -66,8 +66,8 @@ export default class main extends Component {
           id: response.data.id,
           url: response.data.url
         });
-        this.setState({ data: response.data.data, loading: true });
-        console.log(response.data.data);
+        this.setState({ data: [response.data.data], loading: true });
+        console.log("strinfy", JSON.stringify(response.data.data));
         console.log("data:", this.state.data);
       })
       .catch(response => {
@@ -93,11 +93,11 @@ export default class main extends Component {
           )}
         </div>
         <div>
-          {/* {loading && (
-            // <div>
-            //   <PdfList pdfValue={data} />
-            // </div>
-          )} */}
+          {loading && (
+            <div>
+              <PdfList pdfValue={data} />
+            </div>
+          )}
         </div>
       </Container>
     );

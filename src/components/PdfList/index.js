@@ -11,63 +11,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 export default class PdfList extends Component {
   state = {
     sequencia: "",
-    checked: [],
-    Scnis: [
-      {
-        seq: 1,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 2,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 3,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 4,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 5,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 6,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      }
-    ]
+    checked: []
   };
 
   calculator(date) {
@@ -96,145 +40,35 @@ export default class PdfList extends Component {
 
   render() {
     const { pdfValue } = this.props;
-    const CNIS = [
-      {
-        seq: 1,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 2,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 3,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 4,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 5,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 6,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 7,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 8,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 9,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 10,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 11,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      },
-      {
-        seq: 12,
-        OrigemdoVínculo: "teste",
-        Indicadores: "teste2",
-        data: {
-          Competência: [],
-          remuneracao: []
-        }
-      }
-    ];
 
     return (
       <Container>
         <List className="t">
-          {pdfValue.map(cnis => (
+          {pdfValue.map((cnis, index) => (
             <ListItem
               className="box"
-              key={cnis.Seq}
+              key={cnis[index].Seq}
               role={undefined}
               dense
               button
-              onClick={this.handleToggle(cnis.Seq)}
+              onClick={this.handleToggle(cnis[index].Seq)}
             >
               <div className="inside-box">
                 <div className="content">
                   <span>Seq.</span>
-                  {cnis.Seq}
+                  {cnis[index].Seq}
                 </div>
                 <div className="content">
                   <span>Origem Do Vículo</span>
-                  <span>{cnis.Origem_Do_Vinculo}</span>
+                  <span>{cnis[index].Origem_Do_Vinculo}</span>
                 </div>
                 <div className="content">
                   <span>Indicadores</span>
-                  <span>{cnis.Indicadores}</span>
+                  <span>{cnis[index].Indicadores}</span>
                 </div>
                 <div className="content">
                   <Checkbox
-                    checked={this.state.checked.indexOf(cnis.seq) !== -1}
+                    checked={this.state.checked.indexOf(cnis[index].seq) !== -1}
                     tabIndex={-1}
                     disableRipple
                   />

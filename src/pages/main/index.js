@@ -17,6 +17,14 @@ export default class main extends Component {
     data: []
   };
 
+  componentDidMount() {
+    const response = api
+      .get("files/74")
+      .then(response =>
+        this.setState({ data: [response.data], loading: true })
+      );
+  }
+
   handleUpload = files => {
     const uploadedFiles = files.map(file => ({
       file,
@@ -66,7 +74,7 @@ export default class main extends Component {
           id: response.data.id,
           url: response.data.url
         });
-        this.setState({ data: response.data.data, loading: true });
+        this.setState({ data: [response.data.data], loading: true });
         // console.log("strinfy", JSON.stringify(response.data.data));
         console.log("data:", this.state.data);
       })
@@ -78,6 +86,7 @@ export default class main extends Component {
   };
   render() {
     const { uploadedFiles, loading, data } = this.state;
+    console.log("data:", this.state.data);
 
     return (
       <Container>

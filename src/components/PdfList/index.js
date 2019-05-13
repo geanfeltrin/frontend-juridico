@@ -77,7 +77,7 @@ export default class PdfList extends Component {
             </ListItem>
           ))} */}
 
-          {console.log(pdfValue.CNPJ_CEI_CPF)}
+          {console.log(pdfValue.map(cnis => cnis.Data_Inicio))}
         </List>
         <Button
           type="button"

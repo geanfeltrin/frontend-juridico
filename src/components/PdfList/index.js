@@ -44,7 +44,7 @@ export default class PdfList extends Component {
     return (
       <Container>
         <List className="t">
-          {pdfValue.map((cnis, index) => (
+          {/* {pdfValue.map((cnis, index) => (
             <ListItem
               className="box"
               key={cnis[index].Seq}
@@ -75,7 +75,9 @@ export default class PdfList extends Component {
                 </div>
               </div>
             </ListItem>
-          ))}
+          ))} */}
+
+          {console.log(pdfValue.CNPJ_CEI_CPF)}
         </List>
         <Button
           type="button"

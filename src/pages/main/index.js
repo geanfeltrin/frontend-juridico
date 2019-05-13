@@ -66,8 +66,8 @@ export default class main extends Component {
           id: response.data.id,
           url: response.data.url
         });
-        this.setState({ data: [response.data.data], loading: true });
-        console.log("strinfy", JSON.stringify(response.data.data));
+        this.setState({ data: response.data.data, loading: true });
+        // console.log("strinfy", JSON.stringify(response.data.data));
         console.log("data:", this.state.data);
       })
       .catch(response => {
@@ -78,8 +78,6 @@ export default class main extends Component {
   };
   render() {
     const { uploadedFiles, loading, data } = this.state;
-    const { Seq } = data;
-    console.log(Seq);
 
     return (
       <Container>

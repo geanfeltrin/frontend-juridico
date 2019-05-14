@@ -19,10 +19,8 @@ export default class main extends Component {
 
   componentDidMount() {
     const response = api
-      .get("files/74")
-      .then(response =>
-        this.setState({ data: [response.data], loading: true })
-      );
+      .get("files/76")
+      .then(response => this.setState({ data: response.data, loading: true }));
   }
 
   handleUpload = files => {
@@ -75,8 +73,6 @@ export default class main extends Component {
           url: response.data.url
         });
         this.setState({ data: [response.data.data], loading: true });
-        // console.log("strinfy", JSON.stringify(response.data.data));
-        console.log("data:", this.state.data);
       })
       .catch(response => {
         this.updateFile(uploadedFiles.id, {
@@ -86,7 +82,6 @@ export default class main extends Component {
   };
   render() {
     const { uploadedFiles, loading, data } = this.state;
-    console.log("data:", this.state.data);
 
     return (
       <Container>

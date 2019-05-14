@@ -11,19 +11,28 @@ import Checkbox from "@material-ui/core/Checkbox";
 export default class PdfList extends Component {
   state = {
     sequencia: "",
-    checked: []
+    checked: [],
+    newData: []
   };
 
-  calculator(date) {
-    var dados = date;
-    var value = this.state.Scnis;
-    var teste = value.map(value => value.seq);
-    const teste2 = dados.map(d => dropWhile(value, d));
-    console.log(teste2);
-  }
+  calculator = () => {
+    const { checked } = this.state;
+    const { pdfValue } = this.props;
+
+    for (let i = 0; i < checked.length; i++) {
+      for (let j = 0; j < pdfValue.length; j++) {
+        if (checked[i] === pdfValue[j].Seq) {
+          pdfValue.splice(j, 1);
+          var novo = [...pdfValue];
+        }
+      }
+    }
+    this.setState({ newData: novo });
+  };
 
   handleToggle = value => () => {
     const { checked } = this.state;
+
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -40,51 +49,50 @@ export default class PdfList extends Component {
 
   render() {
     const { pdfValue } = this.props;
+    console.log(this.state.newData);
 
     return (
       <Container>
         <List className="t">
-          {/* {pdfValue.map((cnis, index) => (
+          {pdfValue.map(cnis => (
             <ListItem
               className="box"
-              key={cnis[index].Seq}
+              key={cnis.Seq}
               role={undefined}
               dense
               button
-              onClick={this.handleToggle(cnis[index].Seq)}
+              onClick={this.handleToggle(cnis.Seq)}
             >
               <div className="inside-box">
-                <div className="content">
-                  <span>Seq.</span>
-                  {cnis[index].Seq}
-                </div>
-                <div className="content">
-                  <span>Origem Do Vículo</span>
-                  <span>{cnis[index].Origem_Do_Vinculo}</span>
-                </div>
-                <div className="content">
-                  <span>Indicadores</span>
-                  <span>{cnis[index].Indicadores}</span>
-                </div>
+                <section className="content">
+                  <h3>Seq.</h3>
+                  <p>{cnis.Seq}</p>
+                </section>
+                <section className="content vinculo">
+                  <h3>Origem Do Vinculo</h3>
+                  <p>{cnis.Origem_Do_Vinculo}</p>
+                </section>
+                <section className="content indicadores">
+                  <h3>Indicadores</h3>
+                  <p>{cnis.Indicadores}</p>
+                </section>
                 <div className="content">
                   <Checkbox
-                    checked={this.state.checked.indexOf(cnis[index].seq) !== -1}
+                    checked={this.state.checked.indexOf(cnis.Seq) !== -1}
                     tabIndex={-1}
-                    disableRipple
+                    disableRipple={false}
                   />
                 </div>
               </div>
             </ListItem>
-          ))} */}
-
-          {console.log(pdfValue.map(cnis => cnis.Data_Inicio))}
+          ))}
         </List>
         <Button
           type="button"
           variant="contained"
           color="secondary"
           className="btn"
-          onClick={() => this.calculator(this.state.sequencia)}
+          onClick={() => this.calculator()}
         >
           PROCESSAR
         </Button>

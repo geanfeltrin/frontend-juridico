@@ -39,6 +39,20 @@ export const Container = styled.div`
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        text-align: center;
+        h3 {
+          font-size: 14px;
+        }
+        p {
+          font-size: 13px;
+        }
+      }
+      .vinculo {
+        width: 50%;
+        padding: 20px;
+      }
+      .indicadores {
+        width: 30%;
       }
     }
   }

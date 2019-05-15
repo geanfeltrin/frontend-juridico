@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { Container } from "./styles";
 import { dropWhile } from "lodash";
+import { CSVLink, CSVDownload } from "react-csv";
 
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
@@ -27,6 +28,11 @@ export default class PdfList extends Component {
         }
       }
     }
+
+    console.log(
+      novo.map(novo => (novo.Tabela = [...novo.Tabela, " xSteps: 1"]))
+    );
+
     this.setState({ newData: novo });
   };
 
@@ -49,7 +55,7 @@ export default class PdfList extends Component {
 
   render() {
     const { pdfValue } = this.props;
-    console.log(this.state.newData);
+    // console.log(this.state.newData);
 
     return (
       <Container>
@@ -96,6 +102,7 @@ export default class PdfList extends Component {
         >
           PROCESSAR
         </Button>
+        <CSVLink data={this.state.newData}>Download me</CSVLink>;
       </Container>
     );
   }

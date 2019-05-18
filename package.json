@@ -12,6 +12,7 @@
     "react-csv": "^1.1.1",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.4",
+    "react-export-excel": "^0.5.3",
     "react-icons": "^3.6.1",
     "react-scripts": "2.1.8",
     "styled-components": "^4.2.0"

@@ -5,6 +5,8 @@ import { uniqueId } from "lodash";
 import ImgDropAndCrop from "../../components/ImgDropCrop";
 import filesize from "filesize";
 import PdfList from "../../components/PdfList";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Fade from "@material-ui/core/Fade";
 
 import { Container } from "./styles";
 
@@ -14,15 +16,11 @@ export default class main extends Component {
   state = {
     uploadedFiles: [],
     loading: false,
+    pdfLoad: false,
     data: []
   };
 
-  componentDidMount() {
-    const response = api
-      .get("files/76")
-      .then(response => this.setState({ data: response.data, loading: true }));
-  }
-
+ 
   handleUpload = files => {
     const uploadedFiles = files.map(file => ({
       file,
@@ -64,6 +62,7 @@ export default class main extends Component {
           this.updateFile(uploadedFiles.id, {
             progress
           });
+          this.setState({ loading: true });
         }
       })
       .then(response => {
@@ -72,7 +71,14 @@ export default class main extends Component {
           id: response.data.id,
           url: response.data.url
         });
-        this.setState({ data: [response.data.data], loading: true });
+
+        api.get(`files/${response.data.id}`).then(response =>
+          this.setState({
+            data: response.data,
+            loading: false,
+            pdfLoad: true
+          })
+        );
       })
       .catch(response => {
         this.updateFile(uploadedFiles.id, {
@@ -81,7 +87,7 @@ export default class main extends Component {
       });
   };
   render() {
-    const { uploadedFiles, loading, data } = this.state;
+    const { uploadedFiles, loading, data, pdfLoad } = this.state;
 
     return (
       <Container>
@@ -95,9 +101,23 @@ export default class main extends Component {
           )}
         </div>
         <div>
-          {loading && (
+          {!loading && pdfLoad && (
             <div>
               <PdfList pdfValue={data} />
+            </div>
+          )}
+          {loading && (
+            <div>
+              <Fade
+                in={loading}
+                style={{
+                  transitionDelay: loading ? "800ms" : "0ms"
+                }}
+                unmountOnExit
+              >
+                <CircularProgress color="secondary" />
+              </Fade>
+              <span>Carregando !!</span>
             </div>
           )}
         </div>

@@ -2,13 +2,10 @@ import React, { Component } from "react";
 
 import { Container } from "./styles";
 
-import { CSVLink, CSVDownload } from "react-csv";
-
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Table } from "@material-ui/core";
 
 export default class PdfList extends Component {
   state = {
@@ -16,22 +13,26 @@ export default class PdfList extends Component {
     checked: [],
     newData: []
   };
+  componentDidMount() {
+    const { pdfValue } = this.props;
+    this.setState({ newData: pdfValue });
+  }
 
   calculator = () => {
     const { checked } = this.state;
     const { pdfValue } = this.props;
 
-    for (let i = 0; i < checked.length; i++) {
-      for (let j = 0; j < pdfValue.length; j++) {
-        if (checked[i] === pdfValue[j].Seq) {
-          pdfValue.splice(j, 1);
-          var novo = [...pdfValue];
+    if (checked.length > 0) {
+      for (let i = 0; i < checked.length; i++) {
+        for (let j = 0; j < pdfValue.length; j++) {
+          if (checked[i] === pdfValue[j].Seq) {
+            pdfValue.splice(j, 1);
+            let novo = [...pdfValue];
+            this.setState({ newData: novo });
+          }
         }
       }
     }
-    console.log(novo);
-
-    this.setState({ newData: novo });
   };
 
   exportCsv = () => {
@@ -42,8 +43,9 @@ export default class PdfList extends Component {
     let tableData = [];
     let data = [];
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < newData.length; i++) {
       const obj = Object.entries(newData[i]);
+
       const tabela = Object.entries(newData[i].Tabela);
       keysHeader = [];
       valuesHeader = [];
@@ -60,7 +62,7 @@ export default class PdfList extends Component {
         }
       }
       for (const [k, v] of obj) {
-        if (k != "Tabela") {
+        if (k !== "Tabela") {
           keysHeader.push(k);
           valuesHeader.push(v);
         }
@@ -73,7 +75,7 @@ export default class PdfList extends Component {
       let t = valuesHeader.join(";");
       let z = tableHeader.join(";");
       let v = tableData.join("");
-      console.log(typeof v);
+
       data.push(k);
       data.push(t);
 
@@ -111,7 +113,7 @@ export default class PdfList extends Component {
 
   render() {
     const { pdfValue } = this.props;
-
+    console.log(this.state.newData);
     return (
       <Container>
         <List className="t">
@@ -153,12 +155,13 @@ export default class PdfList extends Component {
           variant="contained"
           color="secondary"
           className="btn"
-          onClick={() => this.calculator()}
+          onClick={() => {
+            this.calculator();
+            this.exportCsv();
+          }}
         >
-          PROCESSAR
+          PROCESSAR / Exportar CSV
         </Button>
-        {/* <CSVLink data={this.exportCsv}>Download me</CSVLink> */}
-        <Button onClick={this.exportCsv}>Download</Button>
       </Container>
     );
   }

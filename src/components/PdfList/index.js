@@ -135,6 +135,18 @@ export default class PdfList extends Component {
                   <h3>Origem Do Vinculo</h3>
                   <p>{cnis.Origem_Do_Vinculo}</p>
                 </section>
+                <section className="content data">
+                  <h3>Data Inicio</h3>
+                  <p>{cnis.Data_Inicio}</p>
+                </section>
+                <section className="content data">
+                  <h3>Data Fim</h3>
+                  <p>{cnis.Data_Fim}</p>
+                </section>
+                <section className="content data">
+                  <h3>Ult. Remun</h3>
+                  <p>{cnis.Ult_Remun}</p>
+                </section>
                 <section className="content indicadores">
                   <h3>Indicadores</h3>
                   <p>{cnis.Indicadores}</p>

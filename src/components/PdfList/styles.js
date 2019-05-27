@@ -19,7 +19,7 @@ export const Container = styled.div`
     margin: 20px;
     padding: 0 10px;
     background-color: #ffffff;
-    width: 500px;
+    width: 700px;
     min-height: 100px;
     display: flex;
     justify-content: center;
@@ -49,10 +49,13 @@ export const Container = styled.div`
       }
       .vinculo {
         width: 50%;
-        padding: 20px;
+        padding: 5px;
       }
       .indicadores {
         width: 30%;
+      }
+      .data {
+        padding: 10px;
       }
     }
   }

@@ -20,7 +20,13 @@ export default class main extends Component {
     data: []
   };
 
- 
+  async componentDidMount() {
+    const response = await api.get("files/76");
+
+    console.log(response.data);
+    this.setState({ data: response.data, pdfLoad: true });
+  }
+
   handleUpload = files => {
     const uploadedFiles = files.map(file => ({
       file,

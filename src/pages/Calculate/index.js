@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
+
 import api from "../../services/api";
 
 export default class Calculate extends Component {
@@ -29,7 +29,8 @@ export default class Calculate extends Component {
       aposentadoria: ["1000", "2000", "3000", "4000"],
       aliquota: ["0.11", "0.11", "0.11", "0.11", "0.11", "0.11", "0.11", "0.11"]
     },
-    newData: null
+    newData: null,
+    somaValues: null
   };
 
   async componentDidMount() {
@@ -55,11 +56,11 @@ export default class Calculate extends Component {
         });
         newData[j].origem = data.data[j].Origem_Do_Vinculo;
         newData[j].seq = data.data[j].Seq;
-        for (let i = 0; i < data.data[j].Tabela.Competencia.length; i++) {
+        for (let i = 0; i < data.data[j].table.Competencia.length; i++) {
           for (let k = loop; k < tabela.data.length; k++) {
             newData[j].aliquota[k] = "0.11";
-            if (data.data[j].Tabela.Competencia[i] === tabela.data[k]) {
-              newData[j].remuneracao[k] = data.data[j].Tabela.Remuneracao[i]
+            if (data.data[j].table.Competencia[i] === tabela.data[k]) {
+              newData[j].remuneracao[k] = data.data[j].table.Remuneracao[i]
                 .replace(/\./g, "")
                 .replace(/\,/g, ".");
 
@@ -73,16 +74,25 @@ export default class Calculate extends Component {
       }
 
       this.setState({ newData: newData });
+      this.somaValues(newData);
     }
   }
 
-  somatorio() {
-    const { newData } = this.state;
+  somaValues(data) {
+    let soma = [];
+
+    for (let i = 0; i < data.length; i++) {
+      for (let k = 0; k < data[i].remuneracao.length; k++) {
+        soma.push((data[i].remuneracao[k] * data[i].aliquota[k]).toFixed(2));
+      }
+    }
+    this.setState({ somaValues: soma });
   }
 
+  getHighestValues(soma, tabela) {}
   render() {
-    if (this.state.data.data) {
-      console.log(this.state.data.data.map(d => d));
+    if (this.state.newData) {
+      console.log(this.state.newData);
     }
 
     return (
@@ -103,7 +113,7 @@ export default class Calculate extends Component {
             <TableBody>
               {this.state.tabela &&
                 this.state.tabela.data.map((d, i) => (
-                  <TableRow>
+                  <TableRow key={i}>
                     <TableCell>{d}</TableCell>
                     <TableCell>{this.state.tabela.aposentadoria[i]}</TableCell>
                     <TableCell>{this.state.tabela.aliquota[i]}</TableCell>
@@ -118,7 +128,7 @@ export default class Calculate extends Component {
 
           {this.state.newData &&
             this.state.newData.map((d, i) => (
-              <Table>
+              <Table key={d.seq}>
                 <TableHead>
                   <TableRow>
                     <TableCell>
@@ -146,26 +156,6 @@ export default class Calculate extends Component {
                 </TableBody>
               </Table>
             ))}
-
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>VÍNCULO 01: Extrato previdenciário. Seq.</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableHead>
-              <TableRow>
-                <TableCell>Salário de Contribuição</TableCell>
-                <TableCell>Valor Recolhido 11%</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>1900</TableCell>
-                <TableCell>2000</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
         </Container>
       </Paper>
     );

@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import { Container } from "./styles";
+import { Container } from './styles';
 
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Checkbox from "@material-ui/core/Checkbox";
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Checkbox from '@material-ui/core/Checkbox';
 
 export default class PdfList extends Component {
   state = {
-    sequencia: "",
+    sequencia: '',
     checked: [],
     newData: []
   };
@@ -57,12 +57,12 @@ export default class PdfList extends Component {
           for (t in tabela) {
             aux.push(tabela[t][1][k]);
           }
-          tableData.push(aux.join(";"));
-          tableData.push("%0A");
+          tableData.push(aux.join(';'));
+          tableData.push('%0A');
         }
       }
       for (const [k, v] of obj) {
-        if (k !== "Tabela") {
+        if (k !== 'Tabela') {
           keysHeader.push(k);
           valuesHeader.push(v);
         }
@@ -71,25 +71,25 @@ export default class PdfList extends Component {
         tableHeader.push(k);
       }
 
-      let k = keysHeader.join(";");
-      let t = valuesHeader.join(";");
-      let z = tableHeader.join(";");
-      let v = tableData.join("");
+      let k = keysHeader.join(';');
+      let t = valuesHeader.join(';');
+      let z = tableHeader.join(';');
+      let v = tableData.join('');
 
       data.push(k);
       data.push(t);
 
       data.push(z);
       data.push(v);
-      data.push("%0A%0A%0A");
+      data.push('%0A%0A%0A');
     }
 
-    const csvString = data.join("%0A");
+    const csvString = data.join('%0A');
 
-    let a = document.createElement("a");
-    a.href = "data:attachment/csv," + csvString;
-    a.target = "_Blank";
-    a.download = "CNIS.csv";
+    let a = document.createElement('a');
+    a.href = 'data:attachment/csv,' + csvString;
+    a.target = '_Blank';
+    a.download = 'CNIS.csv';
     document.body.appendChild(a);
     a.click();
   };
